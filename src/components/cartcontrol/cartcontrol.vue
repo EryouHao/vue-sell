@@ -13,7 +13,6 @@
 
 <script type="text/ecmascript-6">
   import Vue from 'vue';
-  var eventHub = new Vue();// -------------
 
   export default {
     props: {
@@ -33,7 +32,7 @@
           this.food.count++;
         }
         // this.$dispatch('cart.add', event.target);
-        eventHub.$emit('cart.add', event.target);// ---------------
+        this.$emit('eventCartadd', event.target);// ---------------
       },
       decreaseCart(event) {
         if (!event._constructed) {

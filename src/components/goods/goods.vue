@@ -36,7 +36,7 @@
                       v-show="food.oldPrice">￥{{ food.oldPrice }}</span>
                 </div>
                 <div class="cartcontrol-wrapper">
-                  <cartcontrol :food="food"></cartcontrol>
+                  <cartcontrol :food="food" v-on:eventCartadd="fn"></cartcontrol>
                 </div>
               </div>
             </li>
@@ -115,9 +115,9 @@
         let el = foodList[index];
         this.foodsScroll.scrollToElement(el, 300);
       },
-      _drop(target) {
-        this.$refs.shopcart.drop(target);// -------------
-      },
+      // _drop(target) {
+      //   this.$refs.shopcart.drop(target);// -------------
+      // },
       _initScroll() {
         this.menuScroll = new BScroll(this.$refs.menuWrapper, {
           click: true
@@ -141,17 +141,15 @@
           height += item.clientHeight;
           this.listHeight.push(height);
         }
+      },
+      fn: function(text) {
+        console.log(text);
       }
     },
     components: {
       icon,
       shopcart,
       cartcontrol
-    },
-    events: {
-      'cart.add'(target) {
-        this._drop(target);// -----------
-      }
     }
   };
 </script>
