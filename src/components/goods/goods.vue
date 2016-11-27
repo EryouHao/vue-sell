@@ -4,7 +4,6 @@
       <ul>
         <li v-for="(item, index) in goods" class="menu-item" :class="{'current': currentIndex=== index}" @click="selectMenu(index, $event)">
           <span class="text border-1px">
-            <!-- <span v-show="item.type > 0" class="icon" :class="classMap[item.type]"></span> -->
             <div class="icon-wrapper" v-show="item.type > 0">
               <icon :type="item.type" size="3"></icon>
             </div>
@@ -36,7 +35,7 @@
                       v-show="food.oldPrice">￥{{ food.oldPrice }}</span>
                 </div>
                 <div class="cartcontrol-wrapper">
-                  <cartcontrol :food="food" v-on:eventCartadd="fn"></cartcontrol>
+                  <cartcontrol :food="food" v-on:eventCartadd="_drop"></cartcontrol>
                 </div>
               </div>
             </li>
@@ -115,9 +114,12 @@
         let el = foodList[index];
         this.foodsScroll.scrollToElement(el, 300);
       },
-      // _drop(target) {
-      //   this.$refs.shopcart.drop(target);// -------------
-      // },
+      _drop(target) {
+        // 体验优化，异步执行下落动画
+        this.$nextTick(() => {
+          this.$refs.shopcart.drop(target);// -------------
+        });
+      },
       _initScroll() {
         this.menuScroll = new BScroll(this.$refs.menuWrapper, {
           click: true
@@ -141,10 +143,10 @@
           height += item.clientHeight;
           this.listHeight.push(height);
         }
-      },
-      fn: function(text) {
-        console.log(text);
       }
+      // fn: function(text) {
+      //   console.log(text);
+      // }
     },
     components: {
       icon,
