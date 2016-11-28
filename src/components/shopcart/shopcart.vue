@@ -76,7 +76,7 @@
       }
     },
     data() {
-      return { // --------------
+      return {
         balls: [
           {
             show: false
@@ -152,14 +152,12 @@
     },
     methods: {
       drop(el) {
-        console.log(el); // -------------
         for (let i = 0; i < this.balls.length; i++) {
           let ball = this.balls[i];
           if (!ball.show) {
             ball.show = true;
             ball.el = el;
             this.dropBalls.push(ball);
-            console.log(this.dropBalls);
             return;
           }
         }
@@ -186,7 +184,6 @@
       },
       beforeEnter(el) {
         let count = this.balls.length;
-        console.log('执行了');
         while (count--) {
           let ball = this.balls[count];
           if (ball.show) {
@@ -212,7 +209,6 @@
           inner.style.webkitTransform = 'translate3d(0, 0, 0)';
           inner.style.transform = 'translate3d(0, 0, 0)';
         });
-        console.log('执行了');
       },
       afterEnter(el) {
         let ball = this.dropBalls.shift();
