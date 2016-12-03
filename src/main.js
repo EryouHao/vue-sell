@@ -31,4 +31,4 @@ new Vue({
   components: { App }
 });
 // 默认访问到goods
-router.push('/goods');
+// router.push('/goods');
