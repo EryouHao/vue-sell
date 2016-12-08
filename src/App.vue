@@ -12,7 +12,9 @@
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view :seller="seller"></router-view>
+    <keep-alive>
+      <router-view :seller="seller"></router-view>
+    <keep-alive>
   </div>
 </template>
 
@@ -28,7 +30,6 @@
         seller: {
           id: (() => {
             let queryParam = urlParse();
-            console.log(queryParam);
             return queryParam.id;
           })()
         }
@@ -39,7 +40,6 @@
         response = response.body;
         if (response.errno === ERR_OK) {
           this.seller = Object.assign({}, this.seller, response.data);
-          console.log(this.seller.id);
         }
       });
     },
